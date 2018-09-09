@@ -55,6 +55,11 @@ public class SaleServiceImpl implements SaleService {
     public Sale addPayment(Long saleId, Double value) {
         Sale sale = mSaleRepository.getSaleById(saleId);
 
+        double remainingValue = sale.getTotalValue() - sale.getPaidAmount();
+        if (value > remainingValue) {
+            throw new RuntimeException("O valor informado é maior que o valor restante.");
+        }
+
         Payment payment = new Payment();
         payment.setSale(sale);
         payment.setValue(value);
