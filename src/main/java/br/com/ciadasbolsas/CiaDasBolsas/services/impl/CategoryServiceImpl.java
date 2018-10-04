@@ -32,6 +32,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getAllCategories() {
-        return mCategoryRepository.findAll();
+        return mCategoryRepository.findAllCategories();
+    }
+
+    @Override
+    public Category updateCategory(Category category) {
+        Category newCategory = getCategoryById(category.getId());
+        newCategory.setName(category.getName() == null ? newCategory.getName() : category.getName());
+        return mCategoryRepository.save(newCategory);
     }
 }

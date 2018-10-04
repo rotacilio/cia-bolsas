@@ -45,7 +45,7 @@ public class Product implements Serializable {
     @Column(name = "prod_created_at", nullable = false)
     private Date createdAt;
 
-    //@NotNull(message = "A categoria não pode ser vazia")
+    @NotNull(message = "A categoria não pode ser vazia")
     @ManyToOne
     @JoinColumn(name = "prod_cate_id")
     private Category category;
