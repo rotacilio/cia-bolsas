@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -40,5 +41,13 @@ public class CategoriesController {
             @ApiParam(value = "ID da categoria", required = true)
             @NotNull @PathVariable Long id) {
         return mService.getCategoryById(id);
+    }
+
+    @ApiOperation(value = "Atualizar uma categoria existente")
+    @RequestMapping(method = RequestMethod.PUT)
+    public Category updateCategory(
+            @ApiParam(value = "Categoria a ser atualizada", required = true)
+            @RequestBody Category category) {
+        return mService.updateCategory(category);
     }
 }
