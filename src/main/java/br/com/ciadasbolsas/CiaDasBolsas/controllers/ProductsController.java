@@ -8,10 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -44,6 +41,14 @@ public class ProductsController {
             @ApiParam(value = "Produto a ser atualizado", required = true)
             @RequestBody ProductDTO product) {
         return mProductService.updateProduct(product);
+    }
+
+    @ApiOperation(value = "Deletar um produto")
+    @RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
+    public void deleteProductById(
+            @ApiParam(value = "ID do produto", required = true)
+            @PathVariable Long productId) {
+        mProductService.deleteProductById(productId);
     }
 
     @ApiOperation(value = "Listar produtos por categoria")

@@ -12,4 +12,5 @@ public interface ProductService {
     List<GetProductsResponse> getAllProductsByCategory();
     Product createNewProduct(ProductDTO product);
     Product updateProduct(ProductDTO product);
+    void deleteProductById(Long productId);
 }
