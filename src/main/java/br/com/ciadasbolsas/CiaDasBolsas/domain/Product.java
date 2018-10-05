@@ -45,6 +45,11 @@ public class Product implements Serializable {
     @Column(name = "prod_created_at", nullable = false)
     private Date createdAt;
 
+    @NotNull(message = "A categoria não pode ser vazia")
+    @ManyToOne
+    @JoinColumn(name = "prod_cate_id")
+    private Category category;
+
     public static String getSequenceName() {
         return SEQUENCE_NAME;
     }
@@ -105,6 +110,14 @@ public class Product implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Product() {
     }
 
@@ -118,6 +131,7 @@ public class Product implements Serializable {
                 ", value=" + value +
                 ", available=" + available +
                 ", createdAt=" + createdAt +
+                ", category=" + category +
                 '}';
     }
 }
