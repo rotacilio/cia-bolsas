@@ -16,6 +16,7 @@ import java.util.List;
 @Api(value = "Categories controller", description = "Controlador de categorias")
 @RestController
 @RequestMapping(value = "/categories")
+@CrossOrigin(origins = {"*"})
 public class CategoriesController {
 
     @Autowired
@@ -49,5 +50,18 @@ public class CategoriesController {
             @ApiParam(value = "Categoria a ser atualizada", required = true)
             @RequestBody Category category) {
         return mService.updateCategory(category);
+    }
+
+    @ApiOperation(value = "Remove uma categoria existente")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public boolean removeCategory(
+            @ApiParam(value = "ID da categoria que será removida", required = true)
+            @NotNull @PathVariable Long id) {
+        try {
+            this.mService.removeCategory(id);
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 }
